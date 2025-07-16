@@ -42,13 +42,50 @@ def generate_wifi_qr(ssid, password, security):
     qr.save("wifi_qr.png")
     print("QR code saved as 'wifi_qr.png'")
 
-def main():
-    print("Enter WiFi details to generate QR code:")
-    ssid = input("SSID (Name of a Wi-Fi network): ")
-    password = pwinput.pwinput("Password (Leave empty for no password): ")
-    security = input("Security Type (WPA/WPA2/WPA3/WPA2-WPA3/WEP): ")
+def generate_url_qr(url):
+    """
+    Generate a QR code for a URL/website.
+    :param url: The URL to encode.
+    :type url: str
+    :return: None
+    """
+    qr = qrcode.make(url.strip())
+    qr.save("url_qr.png")
+    print("QR code saved as 'url_qr.png'")
 
-    generate_wifi_qr(ssid, password, security)
+def generate_whatsapp_chat_qr(phone_number):
+    """
+    Generate a QR code to open a WhatsApp chat with a phone number.
+    :param phone_number: The recipient's phone number (country code, no + or spaces).
+    :type phone_number: str
+    :return: None
+    """
+    url = f"https://wa.me/{phone_number}"
+    qr = qrcode.make(url)
+    qr.save("whatsapp_chat_qr.png")
+    print("QR code saved as 'whatsapp_chat_qr.png'")
+
+def main():
+    print("Choose QR code type:")
+    print("1. Wi-Fi")
+    print("2. URL/Website")
+    print("3. WhatsApp Chat")
+    choice = input("Enter 1, 2, or 3: ").strip()
+
+    if choice == "1":
+        print("Enter WiFi details to generate QR code:")
+        ssid = input("SSID (Name of a Wi-Fi network): ")
+        password = pwinput.pwinput("Password (Leave empty for no password): ")
+        security = input("Security Type (WPA/WPA2/WPA3/WPA2-WPA3/WEP): ")
+        generate_wifi_qr(ssid, password, security)
+    elif choice == "2":
+        url = input("Enter the URL (e.g., https://example.com): ")
+        generate_url_qr(url)
+    elif choice == "3":
+        phone_number = input("Enter the phone number (with country code, e.g., 15551234567): ")
+        generate_whatsapp_chat_qr(phone_number)
+    else:
+        print("Invalid choice.")
 
 if __name__ == "__main__":
     main()
