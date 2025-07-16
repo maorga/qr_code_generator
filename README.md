@@ -32,7 +32,7 @@ Scan the QR code with your phone to quickly join a network, open a website, or s
 - **URL/Website:**  
   Enter a URL (e.g., `https://example.com`).
 - **WhatsApp Chat:**  
-  Enter a phone number with country code (e.g., `972549537895`).
+  Enter a phone number with country code (e.g. (Israel +972), `972512553480`).
 
 ## Requirements
 
