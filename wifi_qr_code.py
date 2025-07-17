@@ -56,10 +56,14 @@ def generate_url_qr(url):
 def generate_whatsapp_chat_qr(phone_number):
     """
     Generate a QR code to open a WhatsApp chat with a phone number.
+    checks if the phone number starts with '+' or contains '-' and removes them.
     :param phone_number: The recipient's phone number (country code, no + or spaces).
     :type phone_number: str
     :return: None
     """
+    if phone_number[0] == "+" or "-" in phone_number:
+        phone_number = phone_number.replace("+", "").replace("-", "").strip()
+
     url = f"https://wa.me/{phone_number}"
     qr = qrcode.make(url)
     qr.save("whatsapp_chat_qr.png")
